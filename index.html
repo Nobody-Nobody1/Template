@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <script src="MathMethods.js"></script>
+</head>
+<body>
+    <h1>Hello from Python Server!</h1>
+    <p>This content is served from index.html.</p>
+
+    <label for="num1">Number 1:</label>
+    <input type="text" id="num1" name="num1" placeholder="Enter your Number">
+    <p></p>
+    <label for="num2">Number 2:</label>
+    <input type="text" id="num2" name="num2" placeholder="Enter your Number">
+    <p></p>
+            
+    <p id="result"></p>
+    <p></p>
+    <button onclick="Add()">Add</button>
+    <button onclick="Subtract()">Subtract</button>
+    <button onclick="Multiply()">Multiply</button>
+    <button onclick="Divide()">Divide</button>
+    <h2>Result: <span id="result"></span></h2>
+</script>
+    
+    <script>
+        function Add() {
+            // Get the values from the input fields, parse them as floats, and calculate the result
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const result = num1 + num2;
+            document.getElementById('result').innerText = result;
+        }
+
+        function Subtract() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+
+            const result = num1 - num2;
+            document.getElementById('result').innerText = result;
+        }
+
+        function Multiply() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+
+            const result = num1 * num2;
+            document.getElementById('result').innerText = result;
+        }
+
+        function Divide() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+
+            if (num2 === 0) {
+                document.getElementById('result').innerText = 'Cannot divide by zero';
+            } else {
+                const result = num1 / num2;
+                document.getElementById('result').innerText = result;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
