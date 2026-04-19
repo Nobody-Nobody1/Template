@@ -1,27 +1,20 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import http.server
+import socketserver
+import os
 
-hostName = "localhost"
-serverPort = 8080
+# Directory containing your HTML file
+HTML_DIR = "/path/to/your/html/directory"
 
-class MyServer(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
-        self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
-        self.wfile.write(bytes("<body>", "utf-8"))
-        self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
-        self.wfile.write(bytes("</body></html>", "utf-8"))
+# Port to run the server on
+PORT = 8000
 
-if __name__ == "__main__":        
-    webServer = HTTPServer((hostName, serverPort), MyServer)
-    print("Server started http://%s:%s" % (hostName, serverPort))
+# Change to the directory with the HTML file
+os.chdir(HTML_DIR)
 
-    try:
-        webServer.serve_forever()
-    except KeyboardInterrupt:
-        pass
+# Create the handler
+Handler = http.server.SimpleHTTPRequestHandler
 
-    webServer.server_close()
-    print("Server stopped.")
+# Start the server
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print(f"Serving at http://localhost:{PORT}")
+    httpd.serve_forever()
